@@ -1,0 +1,365 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Dashboard {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              <h4 class="h2 text-white d-inline-block mb-0">Road to Rotterdam!</h4>
+            </div>
+          </div>
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total runs</h5>
+                      <span class="h2 font-weight-bold mb-0">{{runs}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
+                        <i class="ni ni-user-run"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{more_runs_than_last_week}}</span>
+                    <span class="text-nowrap">Since last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total duration</h5>
+                      <span class="h2 font-weight-bold mb-0">{{Total_duration}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
+                        <i class="ni ni-time-alarm"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{Total_duration_last_week}}</span>
+                    <span class="text-nowrap">Since last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total distance</h5>
+                      <span class="h2 font-weight-bold mb-0">{{Total_distance}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                        <i class="ni ni-map-big"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> {{Total_distance_last_week}}</span>
+                    <span class="text-nowrap">Since last week</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="card card-stats">
+                <!-- Card body -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0">Longest run</h5>
+                      <span class="h2 font-weight-bold mb-0">{{Longest_run}}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
+                        <i class="ni ni-trophy"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-sm">
+                    <span class="text-nowrap">{{Longest_run_days_ago}} days ago</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="card bg-default">
+            <div class="card-body">
+              <div class="progress-wrapper">
+                <div class="progress-info">
+                  <div class="progress-label">
+                    <span>Progress</span>
+                  </div>
+                  <div class="progress-percentage">
+                    <span>{{progress}}%</span>
+                  </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{{progress}}%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Volumes of last 4 weeks</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Week</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Completed</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      {{week_1_date}}
+                    </th>
+                    <td>
+                      {{week_1_km}}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <span class="mr-2">{{week_1_completed}}%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{week_1_completed}}%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {{week_2_date}}
+                    </th>
+                    <td>
+                      {{week_2_km}}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <span class="mr-2">{{week_2_completed}}%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{week_2_completed}}%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {{week_3_date}}
+                    </th>
+                    <td>
+                      {{week_3_km}}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <span class="mr-2">{{week_3_completed}}%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{week_3_completed}}%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {{week_4_date}}
+                    </th>
+                    <td>
+                      {{week_4_km}}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <span class="mr-2">{{week_4_completed}}%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{week_4_completed}}%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {{week_5_date}}
+                    </th>
+                    <td>
+                      {{week_5_km}}
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                          <span class="mr-2">{{week_5_completed}}%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: {{week_5_completed}}%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Stats per trainingstype</h3>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <!-- Projects table -->
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Runs</th>
+                    <th scope="col">Volume</th>
+                    <th scope="col">Average Pace</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Long run
+                    </th>
+                    <td>
+                      {{long_run_numbers}}
+                    </td>
+                    <td>
+                      {{long_run_Volume}}
+                    </td>
+                    <td>
+                      {{long_run_ap}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Recovery
+                    </th>
+                    <td>
+                      {{recovery_run_numbers}}
+                    </td>
+                    <td>
+                      {{recovery_run_Volume}}
+                    </td>
+                    <td>
+                      {{recovery_run_ap}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Interval
+                    </th>
+                    <td>
+                      {{interval_run_numbers}}
+                    </td>
+                    <td>
+                      {{interval_run_Volume}}
+                    </td>
+                    <td>
+                      {{interval_run_ap}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Fartlek
+                    </th>
+                    <td>
+                      {{fartlek_run_numbers}}
+                    </td>
+                    <td>
+                      {{fartlek_run_Volume}}
+                    </td>
+                    <td>
+                      {{fartlek_run_ap}}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Hill run
+                    </th>
+                    <td>
+                      {{hill_run_numbers}}
+                    </td>
+                    <td>
+                      {{hill_run_Volume}}
+                    </td>
+                    <td>
+                      {{hill_run_ap}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+  <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+
+{% endblock javascripts %}
