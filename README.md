@@ -1,5 +1,5 @@
 # Road to Rotterdam Dashboard
-Insert the three pictures
+[](https://github.com/BrechtDewilde1/RoadToRotterdam/blob/master/ShowCase1.png)
 [Link to dashboard](http://bthewild.pythonanywhere.com/index)
 
 # Story 
